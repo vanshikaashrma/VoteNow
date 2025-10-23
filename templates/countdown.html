@@ -1,0 +1,13 @@
+<script>
+function countdown(endTime, elementId) {
+  function update() {
+    let diff = new Date(endTime) - new Date();
+    if (diff <= 0) { document.getElementById(elementId).innerHTML = "Election Ended"; return; }
+    let hours = Math.floor(diff / 3600000);
+    let minutes = Math.floor((diff % 3600000) / 60000);
+    let seconds = Math.floor((diff % 60000) / 1000);
+    document.getElementById(elementId).innerHTML = hours + "h " + minutes + "m " + seconds + "s";
+  }
+  setInterval(update, 1000);
+}
+</script>

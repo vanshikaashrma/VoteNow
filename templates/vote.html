@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ position.election.title }} - {{ position.title }}</h2>
+<p>Select your preferred candidate:</p>
+<form method="post">
+  {% csrf_token %}
+  <div class="row">
+    {% for candidate in candidates %}
+      <div class="col-md-3 col-6 mb-4">
+        <div class="card h-100">
+          {% if candidate.image %}
+            <img src="{{ candidate.image.url }}" class="card-img-top" style="height:220px; object-fit:cover;" alt="Candidate Image">
+          {% else %}
+            <div class="card-img-top bg-light text-center" style="height:220px; display:flex; align-items:center; justify-content:center;">
+              <span style="font-size:80px; color:#ccc;">?</span>
+            </div>
+          {% endif %}
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ candidate.name }}</h5>
+            <input type="radio" name="candidate" value="{{ candidate.id }}" required>
+            <label>Vote</label>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="text-center">
+    <button type="submit" class="btn btn-primary btn-lg mt-3">Cast Your Vote</button>
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4" style="font-weight: 600;">Results for: {{ election.title }}</h2>
+  {% for position, info in positions.items %}
+    <h4 class="mt-4">{{ position.title|upper }}</h4>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Candidate</th>
+          <th>Votes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in info.candidates %}
+        <tr>
+          <td>
+            {{ c.name }}
+            {% if c.votes == info.max_votes and info.max_votes > 0 %}
+              <div>
+                <span class="badge rounded-pill bg-success mt-2" style="font-size: 1rem;">Winner</span>
+              </div>
+            {% endif %}
+          </td>
+          <td>{{ c.votes }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endfor %}
+</div>
+{% endblock %}

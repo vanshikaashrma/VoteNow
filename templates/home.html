@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+
+  <h2 class="mb-4" style="font-weight: 600;">Active Elections</h2>
+  {% if active_elections %}
+    {% for election in active_elections %}
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h3 class="card-title">{{ election.title }}</h3>
+          <p class="text-muted">{{ election.description }}</p>
+          <h5 class="mb-2 mt-4" style="font-weight: 500;">Positions to vote for:</h5>
+          <div class="row">
+            {% for position in election.position_set.all %}
+            <div class="col-md-6 mb-3">
+              <div class="d-flex align-items-center p-3 border rounded bg-light">
+                <span class="me-3" style="font-size: 1.15rem; font-weight: 500;">{{ position.title }}</span>
+                <a href="{% url 'vote' position.id %}" class="btn btn-primary btn-sm ms-auto">Vote</a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="alert alert-info">No active elections.</div>
+  {% endif %}
+
+  <h2 class="mb-4 mt-5" style="font-weight: 600;">Completed Elections</h2>
+  {% if completed_elections %}
+    {% for election in completed_elections %}
+      <div class="card shadow-sm mb-4 border-success">
+        <div class="card-body">
+          <h3 class="card-title">{{ election.title }}</h3>
+          <p class="text-muted">{{ election.description }}</p>
+          <a href="{% url 'results' election.id %}" class="btn btn-success">View Results</a>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="alert alert-secondary">No elections have been completed yet.</div>
+  {% endif %}
+
+</div>
+{% endblock %}
