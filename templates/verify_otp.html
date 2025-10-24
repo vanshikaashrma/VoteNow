@@ -3,7 +3,7 @@
 <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
   <div class="card shadow" style="width: 350px;">
     <div class="card-body">
-      <h3 class="card-title mb-4 text-center">Login</h3>
+      <h4 class="card-title mb-4 text-center">Verify Email</h4>
       {% if messages %}
         {% for message in messages %}
           <div class="alert alert-danger">{{ message }}</div>
@@ -12,17 +12,14 @@
       <form method="post">
         {% csrf_token %}
         <div class="mb-3">
-          <input type="text" name="username" class="form-control" placeholder="Username" required>
-        </div>
-        <div class="mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password" required>
+          <input type="text" name="otp" class="form-control" placeholder="Enter OTP" required>
         </div>
         <div class="d-grid">
-          <button type="submit" class="btn btn-primary mb-2">Login</button>
+          <button type="submit" class="btn btn-primary mb-2">Verify</button>
         </div>
       </form>
       <div class="text-center mt-2">
-        <span>Don't have an account? <a href="{% url 'register' %}">Sign Up</a></span>
+        <span>Didn't receive OTP? Check your spam/junk folder.</span>
       </div>
     </div>
   </div>

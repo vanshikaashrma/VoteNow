@@ -4,10 +4,18 @@
   <div class="card shadow" style="width: 350px;">
     <div class="card-body">
       <h3 class="card-title mb-4 text-center">Sign Up</h3>
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-danger">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
       <form method="post">
         {% csrf_token %}
         <div class="mb-3">
           <input type="text" name="username" class="form-control" placeholder="Username" required>
+        </div>
+        <div class="mb-3">
+          <input type="email" name="email" class="form-control" placeholder="Email" required>
         </div>
         <div class="mb-3">
           <input type="password" name="password" class="form-control" placeholder="Password" required>

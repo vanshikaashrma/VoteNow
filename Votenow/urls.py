@@ -29,6 +29,7 @@ urlpatterns = [
     path('vote/<int:position_id>/', views.vote, name='vote'),
     path('results/<int:election_id>/', views.results, name='results'),
     path('admin/', admin.site.urls),
+    path('verify-otp/', views.verify_otp, name='verify_otp'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
